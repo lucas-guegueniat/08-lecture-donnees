@@ -1,4 +1,8 @@
+"""Lucas Guéguéniat - 08-lecture-donnees"""
+
 #### Imports et définition des variables globales
+
+import csv
 
 FILENAME = "listes.csv"
 
@@ -14,38 +18,59 @@ def read_data(filename):
         list: le contenu du fichier (1 list par ligne)
     """
     l = []
+    with open(filename, 'r', encoding="utf8") as f:
+        r = csv.reader(f, delimiter=';')
+        l = list(r)
+        l = [[int(i) for i in l[j]] for j in range(len(l))]
     return l
 
 def get_list_k(data, k):
-    l = []
-    return l
+    """Retourne la k-ième liste
+    """
+    l = data
+    return l[k]
 
 def get_first(l):
-    return None
+    """Retourne le premier élément de la liste en argument
+    """
+    return l[0]
 
 def get_last(l):
-    return None
+    """Retourne le dernier élément de la liste en argument
+    """
+    return l[-1]
 
 def get_max(l):
-    return None
+    """Retourne la valeur max de la liste
+    """
+    return max(l)
 
 def get_min(l):
-    return None
+    """Retourne la valeur min de la liste
+    """
+    return min(l)
 
 def get_sum(l):
-    return None
+    """Retourne la somme des éléments de la liste
+    """
+    s = 0
+    for i in l:
+        s = s + i
+    return s
 
 
 #### Fonction principale
 
 
 def main():
-    pass
-    # data = read_data(FILENAME)
-    # for i, l in enumerate(data):
-    #     print(i, l)
-    # k = 37
-    # print(k, get_list_k(data, 37))
+    """Fonction principale appelant et vérifiant les autres fonctions
+    """
+    data = read_data(FILENAME)
+    for i, l in enumerate(data):
+        print(i, l)
+    k = 37
+    print(k, get_list_k(data, 37))
+    print(get_sum(data[k]))
 
 
 if __name__ == "__main__":
